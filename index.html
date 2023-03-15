@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=0">
+	<style>
+		body {
+		font-family: Arial, sans-serif;
+		background-color: #f2f2f2;
+		}
+
+		h2 {
+		font-size: 28px;
+		margin-bottom: 20px;
+		}
+
+		p {
+		font-size: 18px;
+		margin-bottom: 10px;
+		}
+
+		#demo {
+		font-weight: bold;
+		}
+
+		#mcAns1,
+		#mcAns2,
+		#mcAns3,
+		#mcAns4{
+		cursor: pointer;
+		}
+
+		#mcAns1:hover,
+		#mcAns2:hover,
+		#mcAns3:hover,
+		#mcAns4:hover {
+		background-color: #ddd;
+		}
+
+		/* Centering styles */
+		#container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		}
+
+		#quiz-box {
+		max-width: 500px;
+		text-align: center;
+		}
+	</style>
+<style type="text/css" data-asas-style="">body, div, a, p, span{ user-select: text !important; }p, h1, h2, h3, h4, h5, h6{ cursor: auto; user-select: text !important; }::selection{ background-color: #338FFF !important; color: #fff !important; }</style></head>
+<body onload="start();">
+<div id="container">
+      <div id="quiz-box">
+		<h2>小測驗</h2>
+		<p id="demo">火水</p>
+		<p id="mcAns1">1: 未濟</p>
+		<p id="mcAns2">2: 隨</p>
+		<p id="mcAns3">3: 解</p>
+		<p id="mcAns4">4: 豫</p>
+		<p id="status" style="color:red;"></p>
+	</div>
+</div>
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('./some path to sw/sw.js',  { scope: '/ironman' }) // 註冊 Service Worker
+    .then(function(reg) {
+      console.log('Registration succeeded. SW working scope is ' + reg.scope); 
+    })
+    .catch(function(error) {
+      console.log('Registration failed with ' + error); // 註冊失敗
+    });
+
+}
+function start(){
+	const elementName = ["天", "地", "澤", "山", "火", "水", "雷", "風"];
+
+	const order = ["天天", "天地", "天澤", "天山", "天火", "天水", "天雷", "天風", "地天", "地地", "地澤", "地山", "地火", "地水", "地雷", "地風", "澤天", "澤地", "澤澤", "澤山", "澤火", "澤水", "澤雷", "澤風", "山天", "山地", "山澤", "山山", "山火", "山水", "山雷", "山風", "火天", "火地", "火澤", "火山", "火火", "火水", "火雷", "火風", "水天", "水地", "水澤", "水山", "水火", "水水", "水雷", "水風", "雷天", "雷地", "雷澤", "雷山", "雷火", "雷水", "雷雷", "雷風", "風天", "風地", "風澤", "風山", "風火", "風水", "風雷", "風風"];
+
+	const answer = ["天天乾", "天地否", "天澤履", "天山遯", "天火同人", "天水訟", "天雷无妄", "天風姤", "地天泰", "地地坤", "地澤臨", "地山謙", "地火明夷", "地水師", "地雷復", "地風升", "澤天夬", "澤地萃", "澤澤兌", "澤山咸", "澤火革", "澤水困", "澤雷隨", "澤風大過", "山天大畜", "山地剝", "山澤損", "山山艮", "山火賁", "山水蒙", "山雷頤", "山風蠱", "火天大有", "火地晉", "火澤睽", "火山旅", "火火離", "火水未濟", "火雷噬嗑", "火風鼎", "水天需", "水地比", "水澤節", "水山蹇", "水火既濟", "水水坎", "水雷屯", "水風井", "雷天大壯", "雷地豫", "雷澤歸妹", "雷山小過", "雷火豐", "雷水解", "雷雷震", "雷風恒", "風天小畜", "風地觀", "風澤中孚", "風山漸", "風火家人", "風水渙", "風雷益", "風風巽"];
+
+	const choice = ["乾", "否", "履", "遯", "同人", "訟", "无妄", "姤", "泰", "坤", "臨", "謙", "明夷", "師", "復", "升", "夬", "萃", "兌", "咸", "革", "困", "隨", "大過", "大畜", "剝", "損", "艮", "賁", "蒙", "頤", "蠱", "大有", "晉", "睽", "旅", "離", "未濟", "噬嗑", "鼎", "需", "比", "節", "蹇", "既濟", "坎", "屯", "井", "大壯", "豫", "歸妹", "小過", "豐", "解", "震", "恒", "小畜", "觀", "中孚", "漸", "家人", "渙", "益", "巽"];
+
+
+	var randNum1 = Math.floor(Math.random()*8);
+	var randNum2 = Math.floor(Math.random()*8);
+
+	var cardName = elementName[randNum1]+elementName[randNum2];
+	
+	document.getElementById("status").innerHTML = "";
+	document.getElementById("demo").innerHTML = cardName;
+
+	var theAns = ""; 
+	var realID = "";
+
+	for (var i = 0 ; i<64 ; i++){
+	if(cardName == order[i]){
+		theAns = choice[i];
+		realID = [i];
+		console.log(realID + " " + theAns);
+		}
+	}
+	var mc =[];
+	for (var i = 0; i<4; i++){
+		var randNumber_ForAnswer = Math.floor(Math.random()*64);
+		while (randNumber_ForAnswer == realID || randNumber_ForAnswer == mc[0] || randNumber_ForAnswer == mc[1] || randNumber_ForAnswer == mc[2] || randNumber_ForAnswer == mc[3]){
+			randNumber_ForAnswer = Math.floor(Math.random()*64)
+		}
+		document.getElementById("mcAns"+[i+1]).innerHTML = "<span onclick='wrongAns()'>" + [i+1]+": " + choice[randNumber_ForAnswer] + "</span>";
+		mc[i] = randNumber_ForAnswer;
+	}
+
+	var realMC = Math.floor(Math.random() * (4 - 1 + 1) + 1);
+	var okAns = answer[realID];
+	document.getElementById("mcAns"+ realMC).innerHTML = "<span onclick=\"correctAns(\'"+okAns+"');\">"+realMC +": " + choice[realID]+"</span>";
+	
+}
+function correctAns(varrr){
+	var anssss = varrr;
+	document.getElementById("status").innerHTML = "正確: " + anssss +"<br><br>" +"<button onclick='start()'>Next</button>";
+}
+
+function wrongAns(){
+	document.getElementById("status").innerHTML = "錯!";
+}
+</script>
+
+
+</body>
+<script>
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('./sw.js')
+		.then(reg => console.log('SW registered!', reg))
+		.catch(err => console.log('Error!', err));
+	}
+</script>
+</html>
