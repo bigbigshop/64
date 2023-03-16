@@ -26,22 +26,14 @@
 		#mcAns1,
 		#mcAns2,
 		#mcAns3,
-		#mcAns4,
-		#mcAns5,
-		#mcAns6,
-		#mcAns7,
-		#mcAns8{
+		#mcAns4{
 		cursor: pointer;
 		}
 
 		#mcAns1:hover,
 		#mcAns2:hover,
 		#mcAns3:hover,
-		#mcAns4:hover,
-		#mcAns5:hover,
-		#mcAns6:hover,
-		#mcAns7:hover,
-		#mcAns8:hover {
+		#mcAns4:hover {
 		background-color: #ddd;
 		}
 
@@ -100,11 +92,11 @@
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #43b556;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #43b556;
 }
 
 input:checked + .slider:before {
@@ -118,7 +110,7 @@ input:checked + .slider:before {
       <div id="quiz-box">
 	  
 <label class="switch">
-  <input type="checkbox">aa
+  <input type="checkbox" checked>
   <span onclick="displayWord();" class="slider"></span>
 </label>
 		<h2 onclick="location.href = 'https://www.eee-learning.com/article/181'">小測驗</h2>
@@ -138,9 +130,20 @@ input:checked + .slider:before {
 	</div>
 </div>
 <script>
-var displayWording = 1;
+var displayWording = 0;
 var cardName = "";
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('./some path to sw/sw.js',  { scope: '/ironman' }) // 註冊 Service Worker
+    .then(function(reg) {
+      console.log('Registration succeeded. SW working scope is ' + reg.scope); 
+    })
+    .catch(function(error) {
+      console.log('Registration failed with ' + error); // 註冊失敗
+    });
+
+}
 function start(){
 	console.log(displayWording);
 	const elementName = ["天", "地", "澤", "山", "火", "水", "雷", "風"];
@@ -188,7 +191,7 @@ function start(){
 		mc[i] = randNumber_ForAnswer;
 	}
 
-	var realMC = Math.floor(Math.random() * (8 - 1 + 1) + 1);
+	var realMC = Math.floor(Math.random() * (4 - 1 + 1) + 1);
 	var okAns = answer[realID];
 	document.getElementById("mcAns"+ realMC).innerHTML = "<span onclick=\"correctAns(\'"+okAns+"');\">"+realMC +": " + choice[realID]+"</span>";
 	
@@ -217,4 +220,11 @@ function displayWord(){
 
 
 </body>
+<script>
+	if ('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('./sw.js')
+		.then(reg => console.log('SW registered!', reg))
+		.catch(err => console.log('Error!', err));
+	}
+</script>
 </html>
