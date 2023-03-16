@@ -26,14 +26,22 @@
 		#mcAns1,
 		#mcAns2,
 		#mcAns3,
-		#mcAns4{
+		#mcAns4,
+		#mcAns5,
+		#mcAns6,
+		#mcAns7,
+		#mcAns8{
 		cursor: pointer;
 		}
 
 		#mcAns1:hover,
 		#mcAns2:hover,
 		#mcAns3:hover,
-		#mcAns4:hover {
+		#mcAns4:hover,
+		#mcAns5:hover,
+		#mcAns6:hover,
+		#mcAns7:hover,
+		#mcAns8:hover {
 		background-color: #ddd;
 		}
 
@@ -133,6 +141,17 @@ input:checked + .slider:before {
 var displayWording = 0;
 var cardName = "";
 
+/*if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('./some path to sw/sw.js',  { scope: '/ironman' }) // 註冊 Service Worker
+    .then(function(reg) {
+      console.log('Registration succeeded. SW working scope is ' + reg.scope); 
+    })
+    .catch(function(error) {
+      console.log('Registration failed with ' + error); // 註冊失敗
+    });
+
+}*/
 function start(){
 	console.log(displayWording);
 	const elementName = ["天", "地", "澤", "山", "火", "水", "雷", "風"];
@@ -198,11 +217,11 @@ function displayWord(){
 	if (displayWording == 0){
 		displayWording = 1;
 		document.getElementById("demo").innerHTML = cardName;
-		console.log(displayWording);
+		//console.log(displayWording);
 	}else if(displayWording == 1){
 		displayWording = 0;
 		document.getElementById("demo").innerHTML = "";
-		console.log(displayWording);
+		//console.log(displayWording);
 	}
 }
 </script>
