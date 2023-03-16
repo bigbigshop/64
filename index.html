@@ -133,17 +133,6 @@ input:checked + .slider:before {
 var displayWording = 1;
 var cardName = "";
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('./some path to sw/sw.js',  { scope: '/ironman' }) // 註冊 Service Worker
-    .then(function(reg) {
-      console.log('Registration succeeded. SW working scope is ' + reg.scope); 
-    })
-    .catch(function(error) {
-      console.log('Registration failed with ' + error); // 註冊失敗
-    });
-
-}
 function start(){
 	console.log(displayWording);
 	const elementName = ["天", "地", "澤", "山", "火", "水", "雷", "風"];
@@ -220,11 +209,4 @@ function displayWord(){
 
 
 </body>
-<script>
-	if ('serviceWorker' in navigator) {
-		navigator.serviceWorker.register('./sw.js')
-		.then(reg => console.log('SW registered!', reg))
-		.catch(err => console.log('Error!', err));
-	}
-</script>
 </html>
