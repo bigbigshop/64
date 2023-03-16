@@ -53,11 +53,66 @@
 		img{
 		width: 30%;
 		}
+		
+.switch {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: inline-block;
+  width: 48px;
+  height: 24px;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 24px;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
+
 	</style>
 <style type="text/css" data-asas-style="">body, div, a, p, span{ user-select: text !important; }p, h1, h2, h3, h4, h5, h6{ cursor: auto; user-select: text !important; }::selection{ background-color: #338FFF !important; color: #fff !important; }</style></head>
 <body onload="start();">
 <div id="container">
       <div id="quiz-box">
+	  
+<label class="switch">
+  <input type="checkbox">aa
+  <span onclick="displayWord();" class="slider"></span>
+</label>
 		<h2 onclick="location.href = 'https://www.eee-learning.com/article/181'">小測驗</h2>
 		<p id="demo"></p>
 		<img id="pic1" src="img/1.png"/>
@@ -70,6 +125,9 @@
 	</div>
 </div>
 <script>
+var displayWording = 1;
+var cardName = "";
+
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker
     .register('./some path to sw/sw.js',  { scope: '/ironman' }) // 註冊 Service Worker
@@ -82,6 +140,7 @@ if ('serviceWorker' in navigator) {
 
 }
 function start(){
+	console.log(displayWording);
 	const elementName = ["天", "地", "澤", "山", "火", "水", "雷", "風"];
 
 	const order = ["天天", "天地", "天澤", "天山", "天火", "天水", "天雷", "天風", "地天", "地地", "地澤", "地山", "地火", "地水", "地雷", "地風", "澤天", "澤地", "澤澤", "澤山", "澤火", "澤水", "澤雷", "澤風", "山天", "山地", "山澤", "山山", "山火", "山水", "山雷", "山風", "火天", "火地", "火澤", "火山", "火火", "火水", "火雷", "火風", "水天", "水地", "水澤", "水山", "水火", "水水", "水雷", "水風", "雷天", "雷地", "雷澤", "雷山", "雷火", "雷水", "雷雷", "雷風", "風天", "風地", "風澤", "風山", "風火", "風水", "風雷", "風風"];
@@ -94,10 +153,16 @@ function start(){
 	var randNum1 = Math.floor(Math.random()*8);
 	var randNum2 = Math.floor(Math.random()*8);
 
-	var cardName = elementName[randNum1]+elementName[randNum2];
+	cardName = elementName[randNum1]+elementName[randNum2];
 	
 	document.getElementById("status").innerHTML = "";
-	document.getElementById("demo").innerHTML = cardName;
+	
+	if (displayWording == 0){
+		document.getElementById("demo").innerHTML = "";
+	}else{
+		document.getElementById("demo").innerHTML = cardName;
+	}
+	
 	document.getElementById("pic1").src="./img/"+randNum1+".png";
 	document.getElementById("pic2").src="./img/"+randNum2+".png";
 	
@@ -133,6 +198,18 @@ function correctAns(varrr){
 
 function wrongAns(){
 	document.getElementById("status").innerHTML = "錯!";
+}
+
+function displayWord(){
+	if (displayWording == 0){
+		displayWording = 1;
+		document.getElementById("demo").innerHTML = cardName;
+		console.log(displayWording);
+	}else if(displayWording == 1){
+		displayWording = 0;
+		document.getElementById("demo").innerHTML = "";
+		console.log(displayWording);
+	}
 }
 </script>
 
