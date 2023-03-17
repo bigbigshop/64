@@ -134,7 +134,7 @@ input:checked + .slider:before {
 		<p id="mcAns6"></p>
 		<p id="mcAns7"></p>
 		<p id="mcAns8"></p>
-		<p id="status" style="color:red;"></p>
+		<p id="status"></p>
 	</div>
 </div>
 <script>
@@ -212,6 +212,7 @@ function correctAns(varrr){
 
 function wrongAns(){
 	document.getElementById("status").innerHTML = "錯!";
+	document.getElementById("status").style.color = "red";
 }
 
 function displayWord(){
