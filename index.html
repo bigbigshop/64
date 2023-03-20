@@ -203,6 +203,55 @@
             background-color: #338fff !important;
             color: #fff !important;
          }
+		 
+		 .switch2 {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: inline-block;
+            width: 48px;
+            height: 24px;
+         }
+
+         .switch2 input {
+            display: none;
+         }
+
+         .slider2 {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            border-radius: 24px;
+            transition: 0.4s;
+         }
+
+         .slider2:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            border-radius: 50%;
+            transition: 0.4s;
+         }
+
+         input:checked + .slider2 {
+            background-color: #f675aa;
+         }
+
+         input:focus + .slider2 {
+            box-shadow: 0 0 1px #f675aa;
+         }
+
+         input:checked + .slider2:before {
+            transform: translateX(24px);
+         }
       </style>
    </head>
 
@@ -212,6 +261,11 @@
             <label class="switch">
                <input type="checkbox" checked />
                <span onclick="displayWord();" class="slider"></span>
+            </label>
+			
+			<label class="switch2">
+               <input type="checkbox" checked />
+               <span onclick="changeIMG();" class="slider2"></span>
             </label>
 
             <h2 onclick="location.href = 'https://www.eee-learning.com/article/181'">六十四卦</h2>
@@ -242,8 +296,13 @@
       </div>
       <script>
          var displayWording = 0;
+		 var imgStyle = ".svg";
+		 
          var cardName = "";
-         var questionWord = [];
+		 var question1;
+         var question2;
+		 
+		 var questionWord = [];
          var currentRound = 0;
 
          const elementName = [
@@ -332,8 +391,8 @@
             document.getElementById("status").innerHTML = "";
 
             if (currentRound < 64) {
-               var question1 = questionWord[currentRound].substring(0, 1);
-               var question2 = questionWord[currentRound].substring(1, 2);
+               question1 = questionWord[currentRound].substring(0, 1);
+               question2 = questionWord[currentRound].substring(1, 2);
                //console.log(question1);
                //console.log(question2);
 
@@ -348,8 +407,8 @@
                   document.getElementById("demo").innerHTML = cardName;
                }
 
-               document.getElementById("pic1").src = "./img/" + question1 + ".png";
-               document.getElementById("pic2").src = "./img/" + question2 + ".png";
+               document.getElementById("pic1").src = "./img/" + question1 + imgStyle;
+               document.getElementById("pic2").src = "./img/" + question2 + imgStyle;
 
                var theAns = "";
                var realID = "";
@@ -378,13 +437,13 @@
                   ) {
                      randNumber_ForAnswer = Math.floor(Math.random() * 64);
                   }
-                  document.getElementById("mcAns" + [i + 1]).innerHTML = "<span class='removeMe' onclick='wrongAns()'>" + [i + 1] + ": " + elementName[randNumber_ForAnswer].substring(2, elementName[randNumber_ForAnswer].length) + "</span>";
+                  document.getElementById("mcAns" + [i + 1]).innerHTML = "<span class='removeMe' onclick='wrongAns()'>" + elementName[randNumber_ForAnswer].substring(2, elementName[randNumber_ForAnswer].length) + "</span>";
                   mc[i] = randNumber_ForAnswer;
                }
 
                var realMC = Math.floor(Math.random() * (8 - 1 + 1) + 1);
                var okAns = elementName[realID];
-               document.getElementById("mcAns" + realMC).innerHTML = "<span class='removeMe' onclick=\"correctAns('" + okAns + "');\">" + realMC + ": " + elementName[realID].substring(2, elementName[realID].length) + "</span>";
+               document.getElementById("mcAns" + realMC).innerHTML = "<span class='removeMe' onclick=\"correctAns('" + okAns + "');\">" + elementName[realID].substring(2, elementName[realID].length) + "</span>";
             }
          }
          function correctAns(varrr) {
@@ -423,13 +482,26 @@
             if (displayWording == 0) {
                displayWording = 1;
                document.getElementById("demo").innerHTML = cardName;
-               //console.log(displayWording);
             } else if (displayWording == 1) {
                displayWording = 0;
                document.getElementById("demo").innerHTML = "";
-               //console.log(displayWording);
             }
          }
+		 
+		 function changeIMG(){
+			if (imgStyle == ".png") {
+               imgStyle = 1;
+			   imgStyle = ".svg";
+			   
+			   document.getElementById("pic1").src = "./img/" + question1 + imgStyle;
+               document.getElementById("pic2").src = "./img/" + question2 + imgStyle;
+			   
+            } else if (imgStyle == ".svg") {
+               imgStyle = ".png";
+               document.getElementById("pic1").src = "./img/" + question1 + imgStyle;
+               document.getElementById("pic2").src = "./img/" + question2 + imgStyle;
+            }
+		 }
       </script>
    </body>
 </html>
