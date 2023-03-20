@@ -1,309 +1,319 @@
 <!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0, user-scalable=0">
-<style>
-body {
-  font-family: 'Montserrat', sans-serif;
-  background-color: #f2f2f2;
-  overflow-x: hidden;
-  margin: 0;
-}
-
-h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  cursor: pointer;
-}
-
-p {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-#demo {
-  font-weight: bold;
-}
-
-.removeMe {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 20px;
-  margin-bottom: 16px;
-  border-radius: 8px;
-  background-color: #4caf50;
-  color: #fff;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.removeMe:hover {
-  background-color: #008CBA;
-}
-
-/* Centering styles */
-#container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-#quiz-box {
-  max-width: 500px;
-  text-align: center;
-  padding: 40px;
-  background-color: #fff;
-  border-radius: 16px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-img {
-  max-width: 50%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 16px;
-  margin-bottom: 20px;
-}
-
-.switch {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  display: inline-block;
-  width: 48px;
-  height: 24px;
-}
-
-.switch input {
-  display: none;
-}
-
-.slider {
-  position: relative;
-  display: inline-block;
-  width: 48px;
-  height: 24px;
-  border-radius: 24px;
-  background-color: #ccc;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 20px;
-  width: 20px;
-  left: 2px;
-  bottom: 2px;
-  background-color: white;
-  border-radius: 50%;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #43b556;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #43b556;
-}
-
-input:checked + .slider:before {
-  transform: translateX(24px);
-}
-
-/* Responsive styles */
-@media only screen and (max-width: 600px) {
-  #quiz-box {
-    padding: 20px;
-    border-radius: 8px;
-  }
-
-  h2 {
-    font-size: 20px;
-  }
-
-  p {
-    font-size: 14px;
-  }
-
-  img {
-    margin-bottom: 16px;
-  }
-
-  .removeMe {
-    padding: 10px 16px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-  }
-}
-button {
-  display: inline-block;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  background-color: #43b556;
-  color: #fff;
-  border: none;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-}
-
-button:hover {
-  background-color: #008CBA;
-}
-</style>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f2f2f2;
+			overflow: hidden;
+		}
+		
+		h2 {
+			font-size: 28px;
+			margin-bottom: 20px;
+		}
+		
+		p {
+			font-size: 18px;
+			margin-bottom: 10px;
+		}
+		
+		#demo {
+			font-weight: bold;
+		}
+		
+		#mcAns1,
+		#mcAns2,
+		#mcAns3,
+		#mcAns4,
+		#mcAns5,
+		#mcAns6,
+		#mcAns7,
+		#mcAns8{
+			cursor: pointer;
+		}
+		
+		#mcAns1:hover,
+		#mcAns2:hover,
+		#mcAns3:hover,
+		#mcAns4:hover,
+		#mcAns5:hover,
+		#mcAns6:hover,
+		#mcAns7:hover,
+		#mcAns8:hover {
+			background-color: #ddd;
+		}
+		
+		/* Centering styles */
+		#container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 90vh;
+		}
+		
+		#quiz-box {
+			max-width: 500px;
+			text-align: center;
+		}
+		
+		
+		
+		img {
+			max-width: 30%;
+			height: auto;
+			object-fit: cover;
+			border-radius: 16px;
+		}
+		
+		.switch {
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			display: inline-block;
+			width: 48px;
+			height: 24px;
+		}
+		
+		.switch input {
+			display: none;
+		}
+		
+		.slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ccc;
+			border-radius: 24px;
+			transition: .4s;
+		}
+		
+		.slider:before {
+			position: absolute;
+			content: "";
+			height: 20px;
+			width: 20px;
+			left: 2px;
+			bottom: 2px;
+			background-color: white;
+			border-radius: 50%;
+			transition: .4s;
+		}
+		
+		input:checked + .slider {
+			background-color: #43b556;
+		}
+		
+		input:focus + .slider {
+			box-shadow: 0 0 1px #43b556;
+		}
+		
+		input:checked + .slider:before {
+			transform: translateX(24px);
+		}
+		
+		button {
+			display: inline-block;
+			padding: 5px;
+			border-radius: 5px;
+			font-size: 16px;
+			font-weight: bold;
+			text-align: center;
+			text-decoration: none;
+			background-color: #43b556;
+			color: #fff;
+			border: none;
+			box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+			cursor: pointer;
+			transition: background-color 0.2s ease-in-out;
+			top: -10px;
+			position: relative;
+		}
+		
+		button:hover {
+			background-color: #008CBA;
+		}
+		
+		.removeMe {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 5px;
+			margin-bottom: 1px;
+			border-radius: 5px;
+			background-color: #4caf50;
+			color: #fff;
+			box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+			cursor: pointer;
+			transition: background-color 0.2s ease-in-out;
+		}
+		
+		.removeMe:hover {
+			background-color: #008CBA;
+		}
+		
+		h2 {
+			font-size: 48px;
+			font-weight: bold;
+			background: linear-gradient(45deg, #00f260, #0575e6, #1e90ff, #833ab4);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+		p#status {
+			margin: 0px;
+		}
+		
+	</style>
+	<style type="text/css" data-asas-style="">body, div, a, p, span{ user-select: text !important; }p, h1, h2, h3, h4, h5, h6{ cursor: auto; user-select: text !important; }::selection{ background-color: #338FFF !important; color: #fff !important; }</style>
 </head>
 
 <body onload="start(0);">
-<div id="container">
-    <div id="quiz-box">	  
-		<label class="switch">
-		  <input type="checkbox" checked>
-		  <span onclick="displayWord();" class="slider"></span>
-		</label>
-
-		<h2 onclick="location.href = 'https://www.eee-learning.com/article/181'">六十四卦</h2>
-		<p id="demo"></p>
-		<img id="pic1"/>
-		<img id="pic2"/>
-		<p id="mcAns1"></p>
-		<p id="mcAns2"></p>
-		<p id="mcAns3"></p>
-		<p id="mcAns4"></p>
-		<p id="mcAns4"></p>
-		<p id="mcAns5"></p>
-		<p id="mcAns6"></p>
-		<p id="mcAns7"></p>
-		<p id="mcAns8"></p>
-		<p id="status"></p>
+	<div id="container">
+		<div id="quiz-box">
+			<label class="switch">
+				<input type="checkbox" checked>
+				<span onclick="displayWord();" class="slider"></span>
+			</label>
+			
+			<h2 onclick="location.href = 'https://www.eee-learning.com/article/181'">六十四卦</h2>
+			<p id="demo"></p>
+			<img id="pic1"/>
+			<img id="pic2"/>
+			<p id="mcAns1"></p>
+			<p id="mcAns2"></p>
+			<p id="mcAns3"></p>
+			<p id="mcAns4"></p>
+			<p id="mcAns4"></p>
+			<p id="mcAns5"></p>
+			<p id="mcAns6"></p>
+			<p id="mcAns7"></p>
+			<p id="mcAns8"></p>
+			<p id="status"></p>
+		</div>
 	</div>
-</div>
-<script>
-var displayWording = 0;
-var cardName = "";
-var questionWord = [];
-var currentRound = 0;
-
-const elementName = ["天天乾", "天地否", "天澤履", "天山遯", "天火同人", "天水訟", "天雷無妄", "天風姤", "地天泰", "地地坤", "地澤臨", "地山謙", "地火明夷", "地水師", "地雷復", "地風升", "澤天夬", "澤地萃", "澤澤兌", "澤山咸", "澤火革", "澤水困", "澤雷隨", "澤風大過", "山天大畜", "山地剝", "山澤損", "山山艮", "山火賁", "山水蒙", "山雷頤", "山風蠱", "火天大有", "火地晉", "火澤睽", "火山旅", "火火離", "火水未濟", "火雷噬嗑", "火風鼎", "水天需", "水地比", "水澤節", "水山蹇", "水火既濟", "水水坎", "水雷屯", "水風井", "雷天大壯", "雷地豫", "雷澤歸妹", "雷山小過", "雷火豐", "雷水解", "雷雷震", "雷風恒", "風天小畜", "風地觀", "風澤中孚", "風山漸", "風火家人", "風水渙", "風雷益", "風風巽"];
-
-
-elementName.sort(compareRandom);
-console.log(elementName);
-for (var k = 0; k < 64 ; k++){
-	questionWord.push(elementName[k].substring(0,2));		
-}
-for (var k = 0; k < 64 ; k++){
-	//console.log(questionWord[k]);
-}
-
-function compareRandom(a,b){
-	return Math.random() - 0.5;
-}
-
-function start(a){	
-	currentRound = a;
-	console.log(currentRound);
-	document.getElementById("status").innerHTML = "";
-
-	if (currentRound < 64){
-		var question1 = questionWord[currentRound].substring(0,1);
-		var question2 = questionWord[currentRound].substring(1,2);
-		//console.log(question1);
-		//console.log(question2);
+	<script>
+		var displayWording = 0;
+		var cardName = "";
+		var questionWord = [];
+		var currentRound = 0;
 		
-		var answer = elementName[currentRound].substring(2,elementName[currentRound].length);
-		console.log(answer);
+		const elementName = ["天天乾", "天地否", "天澤履", "天山遯", "天火同人", "天水訟", "天雷無妄", "天風姤", "地天泰", "地地坤", "地澤臨", "地山謙", "地火明夷", "地水師", "地雷復", "地風升", "澤天夬", "澤地萃", "澤澤兌", "澤山咸", "澤火革", "澤水困", "澤雷隨", "澤風大過", "山天大畜", "山地剝", "山澤損", "山山艮", "山火賁", "山水蒙", "山雷頤", "山風蠱", "火天大有", "火地晉", "火澤睽", "火山旅", "火火離", "火水未濟", "火雷噬嗑", "火風鼎", "水天需", "水地比", "水澤節", "水山蹇", "水火既濟", "水水坎", "水雷屯", "水風井", "雷天大壯", "雷地豫", "雷澤歸妹", "雷山小過", "雷火豐", "雷水解", "雷雷震", "雷風恒", "風天小畜", "風地觀", "風澤中孚", "風山漸", "風火家人", "風水渙", "風雷益", "風風巽"];
 		
-		cardName = question1+question2;
 		
-		if (displayWording == 0){
-			document.getElementById("demo").innerHTML = "";
-		}else{
-			document.getElementById("demo").innerHTML = cardName;
-		}
-		
-		document.getElementById("pic1").src="./img/"+question1+".png";
-		document.getElementById("pic2").src="./img/"+question2+".png";
-		
-		var theAns = ""; 
-		var realID = "";
-
-		for (var i = 0 ; i<64 ; i++){
-		if(cardName == elementName[i].substring(0,2)){
-			theAns = elementName[i].substring(2,elementName[i].length);
-			realID = [i];
-			//console.log(realID + " " + theAns);
-			}
-		}
-		
-		var mc = [];
-		for (var i = 0; i<8; i++){
-			var randNumber_ForAnswer = Math.floor(Math.random()*64);
-			while (randNumber_ForAnswer == realID || randNumber_ForAnswer == mc[0] || randNumber_ForAnswer == mc[1] || randNumber_ForAnswer == mc[2] || randNumber_ForAnswer == mc[3] || randNumber_ForAnswer == mc[4] || randNumber_ForAnswer == mc[5] || randNumber_ForAnswer == mc[6] || randNumber_ForAnswer == mc[7]){
-				randNumber_ForAnswer = Math.floor(Math.random()*64)
-			}
-			document.getElementById("mcAns"+[i+1]).innerHTML = "<span class='removeMe' onclick='wrongAns()'>" + [i+1]+": " + elementName[randNumber_ForAnswer].substring(2,elementName[randNumber_ForAnswer].length) + "</span>";
-			mc[i] = randNumber_ForAnswer;
-		}
-
-		var realMC = Math.floor(Math.random() * (8 - 1 + 1) + 1);
-		var okAns = elementName[realID];
-		document.getElementById("mcAns"+ realMC).innerHTML = "<span class='removeMe' onclick=\"correctAns(\'"+okAns+"');\">"+realMC +": " + elementName[realID].substring(2,elementName[realID].length)+"</span>";
-	}
-}
-function correctAns(varrr){
-	var anssss = varrr;
-	currentRound+=1;
-	
-	var cls = document.getElementsByClassName('removeMe');
-	for(var i = 0; i < cls.length; i++) {
-	   cls[i].removeAttribute('onclick');
-	}
-
-	document.getElementById("status").innerHTML = "正確: " + anssss +"<br><br>" +"<button onclick='start(currentRound)'>Next</button>";
-	document.getElementById("status").style.color = "green";
-
-	if (currentRound == 64){
 		elementName.sort(compareRandom);
 		console.log(elementName);
-		questionWord = [];
-		currentRound = 0;
 		for (var k = 0; k < 64 ; k++){
-			questionWord.push(elementName[k].substring(0,2));		
+			questionWord.push(elementName[k].substring(0,2));
 		}
-
 		for (var k = 0; k < 64 ; k++){
 			//console.log(questionWord[k]);
 		}
-	}
-}
-
-function wrongAns(){
-	document.getElementById("status").innerHTML = "錯!";
-	document.getElementById("status").style.color = "red";
-}
-
-function displayWord(){
-	if (displayWording == 0){
-		displayWording = 1;
-		document.getElementById("demo").innerHTML = cardName;
-		//console.log(displayWording);
-	}else if(displayWording == 1){
-		displayWording = 0;
-		document.getElementById("demo").innerHTML = "";
-		//console.log(displayWording);
-	}
-}
-</script>
-
-
+		
+		function compareRandom(a,b){
+			return Math.random() - 0.5;
+		}
+		
+		function start(a){
+			currentRound = a;
+			console.log(currentRound);
+			document.getElementById("status").innerHTML = "";
+			
+			if (currentRound < 64){
+				var question1 = questionWord[currentRound].substring(0,1);
+				var question2 = questionWord[currentRound].substring(1,2);
+				//console.log(question1);
+				//console.log(question2);
+				
+				var answer = elementName[currentRound].substring(2,elementName[currentRound].length);
+				console.log(answer);
+				
+				cardName = question1+question2;
+				
+				if (displayWording == 0){
+					document.getElementById("demo").innerHTML = "";
+				}else{
+					document.getElementById("demo").innerHTML = cardName;
+				}
+				
+				document.getElementById("pic1").src="./img/"+question1+".png";
+				document.getElementById("pic2").src="./img/"+question2+".png";
+				
+				var theAns = "";
+				var realID = "";
+				
+				for (var i = 0 ; i<64 ; i++){
+					if(cardName == elementName[i].substring(0,2)){
+						theAns = elementName[i].substring(2,elementName[i].length);
+						realID = [i];
+						//console.log(realID + " " + theAns);
+					}
+				}
+				
+				var mc = [];
+				for (var i = 0; i<8; i++){
+					var randNumber_ForAnswer = Math.floor(Math.random()*64);
+					while (randNumber_ForAnswer == realID || randNumber_ForAnswer == mc[0] || randNumber_ForAnswer == mc[1] || randNumber_ForAnswer == mc[2] || randNumber_ForAnswer == mc[3] || randNumber_ForAnswer == mc[4] || randNumber_ForAnswer == mc[5] || randNumber_ForAnswer == mc[6] || randNumber_ForAnswer == mc[7]){
+						randNumber_ForAnswer = Math.floor(Math.random()*64)
+					}
+					document.getElementById("mcAns"+[i+1]).innerHTML = "<span class='removeMe' onclick='wrongAns()'>" + [i+1]+": " + elementName[randNumber_ForAnswer].substring(2,elementName[randNumber_ForAnswer].length) + "</span>";
+					mc[i] = randNumber_ForAnswer;
+				}
+				
+				var realMC = Math.floor(Math.random() * (8 - 1 + 1) + 1);
+				var okAns = elementName[realID];
+				document.getElementById("mcAns"+ realMC).innerHTML = "<span class='removeMe' onclick=\"correctAns(\'"+okAns+"');\">"+realMC +": " + elementName[realID].substring(2,elementName[realID].length)+"</span>";
+			}
+		}
+		function correctAns(varrr){
+			var anssss = varrr;
+			currentRound+=1;
+			
+			var cls = document.getElementsByClassName('removeMe');
+			for(var i = 0; i < cls.length; i++) {
+				cls[i].removeAttribute('onclick');
+			}
+			
+			document.getElementById("status").innerHTML = "正確: " + anssss +"<br><br>" +"<button onclick='start(currentRound)'>Next</button>";
+			document.getElementById("status").style.color = "green";
+			
+			if (currentRound == 64){
+				elementName.sort(compareRandom);
+				console.log(elementName);
+				questionWord = [];
+				currentRound = 0;
+				for (var k = 0; k < 64 ; k++){
+					questionWord.push(elementName[k].substring(0,2));
+				}
+				
+				for (var k = 0; k < 64 ; k++){
+					//console.log(questionWord[k]);
+				}
+			}
+		}
+		
+		function wrongAns(){
+			document.getElementById("status").innerHTML = "錯!";
+			document.getElementById("status").style.color = "red";
+		}
+		
+		function displayWord(){
+			if (displayWording == 0){
+				displayWording = 1;
+				document.getElementById("demo").innerHTML = cardName;
+				//console.log(displayWording);
+			}else if(displayWording == 1){
+				displayWording = 0;
+				document.getElementById("demo").innerHTML = "";
+				//console.log(displayWording);
+			}
+		}
+	</script>
+	
+	
 </body>
 </html>
